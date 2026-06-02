@@ -1,5 +1,6 @@
 package org.naukriAutomation.webdrivermanager;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -13,10 +14,9 @@ public class DriverFactory {
 
     public static WebDriver initDriver(String browser) {
         if (browser.equalsIgnoreCase("chrome")) {
+            WebDriverManager.chromedriver().setup();
             ChromeOptions options = new ChromeOptions();
-            options.addArguments("--headless=new");   // required in CI
-            options.addArguments("--no-sandbox");
-            options.addArguments("--disable-dev-shm-usage");
+            options.addArguments("--headless=new", "--no-sandbox", "--disable-dev-shm-usage");
             driver.set(new ChromeDriver(options));
         } else if (browser.equalsIgnoreCase("firefox")) {
             FirefoxOptions options = new FirefoxOptions();

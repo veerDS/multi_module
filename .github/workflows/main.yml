@@ -30,12 +30,16 @@ jobs:
       - name: Install matching ChromeDriver
         run: |
           CHROME_VERSION=$(google-chrome --version | awk '{print $3}')
-          MAJOR_VERSION=${CHROME_VERSION%%.*}
+          MAJOR_VERSION=$(echo $CHROME_VERSION | cut -d. -f1)
           DRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$MAJOR_VERSION")
-          wget https://chromedriver.storage.googleapis.com/$DRIVER_VERSION/chromedriver_linux64.zip
-          unzip chromedriver_linux64.zip
+          echo "Chrome version: $CHROME_VERSION"
+          echo "Major version: $MAJOR_VERSION"
+          echo "Matching driver: $DRIVER_VERSION"
+          wget -q https://chromedriver.storage.googleapis.com/$DRIVER_VERSION/chromedriver_linux64.zip
+          unzip -o chromedriver_linux64.zip
           sudo mv chromedriver /usr/local/bin/
           chromedriver --version
+      
       
 
       - name: Run @updateNaukriProfile tests

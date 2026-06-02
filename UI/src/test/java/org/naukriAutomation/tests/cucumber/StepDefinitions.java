@@ -18,7 +18,7 @@ public class StepDefinitions {
 
     @Given("We enter login credentials")
     public void login() {
-        profileActions.login("unmeshtemkar@zohomail.in", "1995@umaaa");
+        profileActions.login("veerdhavalshinde@gmail.com", "Omsairam@2712");
     }
 
     @When("We update the profile details")

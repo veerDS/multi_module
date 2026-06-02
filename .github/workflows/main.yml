@@ -1,0 +1,56 @@
+name: Naukri Profile Update Tests - Every 4 Hours
+
+on:
+  schedule:
+    # Runs at 12:00 AM, 4:00 AM, 8:00 AM, 12:00 PM, 4:00 PM, 8:00 PM UTC
+    - cron: '0 0,4,8,12,16,20 * * *'
+  
+  # Allow manual trigger from Actions tab
+  workflow_dispatch:
+
+jobs:
+  run-tests:
+    runs-on: windows-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Set up JDK 21
+        uses: actions/setup-java@v3
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: maven
+      
+      - name: Run @updateNaukriProfile tests
+        working-directory: ./UI
+        run: mvn clean test -Dcucumber.filter.tags="@updateNaukriProfile"
+      
+      - name: Generate Cucumber Report
+        if: always()
+        working-directory: ./UI
+        run: |
+          if (Test-Path "target/cucumber.json") {
+            echo "Cucumber report generated successfully"
+          }
+      
+      - name: Upload Test Reports
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: cucumber-reports
+          path: UI/target/cucumber-html-report.html
+      
+      - name: Upload JSON Reports
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: cucumber-json-reports
+          path: UI/target/cucumber.json
+      
+      - name: Test Results Summary
+        if: always()
+        run: |
+          echo "Test execution completed"
+          echo "Check artifacts for detailed reports"

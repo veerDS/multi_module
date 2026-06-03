@@ -30,8 +30,8 @@ public class NaukriLoginPage {
     public void clickLoginBtn() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         WebElement loginBtn = wait.until(ExpectedConditions.visibilityOf(loginButton));
-        ElementInteractions.highlightElement(driver, loginButton);
-        loginButton.click();
+//        ElementInteractions.highlightElement(driver, loginBtn);
+        loginBtn.click();
     }
 
     public void enterUserName(String userName){

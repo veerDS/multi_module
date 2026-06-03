@@ -34,4 +34,4 @@ jobs:
 
       - name: Run @updateNaukriProfile tests
         working-directory: ./UI
-        run: mvn clean test -Dcucumber.filter.tags="@updateNaukriProfile"
+        run: mvn clean test -Dtest=org.naukriAutomation.tests.testNG.NaukriAppUpdateAutomationTest

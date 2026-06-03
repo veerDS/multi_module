@@ -1,6 +1,7 @@
 package org.naukriAutomation.POM;
 
 import org.naukriAutomation.webdrivermanager.DriverFactory;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -17,6 +18,8 @@ public class NaukriLoginPage {
 
     @FindBy(id = "login_Layer") private WebElement loginButton;
 
+    By loginBtnBy = By.id("login_Layer");
+
     @FindBy(xpath = "//input[@placeholder=\"Enter your active Email ID / Username\"]") private WebElement username;
 
     @FindBy(xpath = "//input[@placeholder=\"Enter your password\"]") private WebElement password;
@@ -29,7 +32,7 @@ public class NaukriLoginPage {
 
     public void clickLoginBtn() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        WebElement loginBtn = wait.until(ExpectedConditions.visibilityOf(loginButton));
+        WebElement loginBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(loginBtnBy));
 //        ElementInteractions.highlightElement(driver, loginBtn);
         loginBtn.click();
     }

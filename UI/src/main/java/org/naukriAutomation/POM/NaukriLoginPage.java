@@ -5,7 +5,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.ElementInteractions;
+
+import java.time.Duration;
 
 public class NaukriLoginPage {
 
@@ -24,6 +28,8 @@ public class NaukriLoginPage {
     }
 
     public void clickLoginBtn() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        WebElement loginBtn = wait.until(ExpectedConditions.visibilityOf(loginButton));
         ElementInteractions.highlightElement(driver, loginButton);
         loginButton.click();
     }

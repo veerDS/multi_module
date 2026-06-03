@@ -23,7 +23,7 @@ public class NaukriAppUpdateAutomationTest extends BaseTest {
     public Object[][] getLoginData() {
 
         return new Object[][]{
-                {"unmeshtemkar@zohomail.in", "1995@umaaa"}
+                {"veerdhavalshinde@gmail.com", "Omsairam@2712"}
         };
     }
 
